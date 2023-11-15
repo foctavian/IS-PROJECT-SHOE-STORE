@@ -9,7 +9,7 @@ class Login(View):
 
     def get(self, request):
         Login.return_url = request.GET.get('return_url')
-        return render(request, 'login.html')
+        return render(request, 'login_animation.html')
 
     def post(self, request):
         email = request.POST.get('email')
@@ -36,7 +36,7 @@ class Login(View):
             error_message = 'Invalid !!'
 
         print(email, password, customer.password)
-        return render(request, 'login.html', {'error': error_message})
+        return render(request, 'login_animation.html', {'error': error_message})
 
 
 def logout(request):
