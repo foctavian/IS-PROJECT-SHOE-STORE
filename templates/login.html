@@ -1,57 +1,122 @@
-{% extends 'base.html' %}
-{% load static %}
+<head>
+<style>
+@font-face {
+  src: url("https://www.axis-praxis.org/fonts/webfonts/AvenirNext_Variable.woff2") format("woff2");
+  font-family: "Avenir";
+  font-style: normal;
+  font-weight: normal;
+}
+body {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  background-color: black;
+  color: transparent;
+  font-family: "Avenir";
+}
 
+.text {
+  font-variation-settings: "wght" 400, "wdth" 100;
+  font-size: 10em;
+  text-align: center;
+  position: absolute;
+  animation: text-flow 6s infinite;
+}
 
-{% block content %}
+.text:nth-child(1) {
+  animation-delay: 0.15s;
+  opacity: 0.8;
+  -webkit-text-stroke: 5px #3f67e1;
+  z-index: 0;
+}
 
-<div class="container">
-    <div class="p-3 m-3">
-        <div class="col-lg-5 rounded mx-auto border pt-4">
-            <div class="text-center col">
+.text:nth-child(2) {
+  animation-delay: 0.3s;
+  opacity: 0.6;
+  -webkit-text-stroke: 5px #3d66e0;
+  z-index: -1;
+}
 
-                <img
-                src="{% static 'images/img.png' %}" alt=""
-                class="" style="height: 150px;">
+.text:nth-child(3) {
+  animation-delay: 0.45s;
+  opacity: 0.4;
+  -webkit-text-stroke: 5px #3a64e0;
+  z-index: -2;
+}
 
-            </div>
-            <h3 class="alert alert-light rounded-pill" style="text-align:center" >Login</h3>
-            <form action="{% url 'login' %}" method="POST">
+.text:nth-child(4) {
+  animation-delay: 0.6s;
+  opacity: 0.2;
+  -webkit-text-stroke: 5px #3862e0;
+  z-index: -3;
+}
 
-                {% csrf_token %}
+.text:nth-child(5) {
+  animation-delay: 0.75s;
+  opacity: 0;
+  -webkit-text-stroke: 5px #3660df;
+  z-index: -4;
+}
 
-                {% if error%}
-                <div class="alert alert-danger" role="alert">
-                    {{error}}
-                </div>
-                {% endif %}
-                <!-- email -->
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input required type="email" name="email" id="email"
-                    value="{{values.email}}"
-                    class=" form-control-sm form-control" placeholder="abc@gmail.com">
-                </div>
+.text:nth-child(6) {
+  animation-delay: 0.9s;
+  opacity: 0.2;
+  -webkit-text-stroke: 5px #345fdf;
+  z-index: -5;
+}
 
+.text:nth-child(7) {
+  animation-delay: 1.05s;
+  opacity: 0.4;
+  -webkit-text-stroke: 5px #325ddf;
+  z-index: -6;
+}
 
-                <!-- password -->
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password"
-                    name="password"
-                    id="password"
-                     class="form-control form-control-sm" >
-                </div>
+.text:nth-child(8) {
+  animation-delay: 1.2s;
+  opacity: 0.6;
+  -webkit-text-stroke: 5px #2f5bde;
+  z-index: -7;
+}
 
-            
-            <div class="easy-checkbox">
-  <input type="checkbox" id ="checkbox" class="noneSelected">
-  <label for="checkbox">Remember me</label>
-</div>
+.text:nth-child(9) {
+  animation-delay: 1.35s;
+  opacity: 0.8;
+  -webkit-text-stroke: 5px #2d59de;
+  z-index: -8;
+}
 
-                <button type="submit" class="btn btn-sm btn-success col-lg-12">Login</button>
-            </form>
-        </div>
-    </div>
-</div>
-
-{% endblock %}
+@keyframes text-flow {
+  25% {
+    font-variation-settings: "wght" 900, "wdth" 100;
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    transform: translateY(-100px);
+    font-variation-settings: "wght" 400, "wdth" 100;
+  }
+  75% {
+    transform: translateY(0%);
+    font-variation-settings: "wght" 900, "wdth" 100;
+    filter: hue-rotate(50deg);
+  }
+}
+</style>
+</head>
+<body>
+<div class="text">Log in</div>
+<div class="text">Log in</div>
+<div class="text">Log in</div>
+<div class="text">Log in</div>
+<div class="text">Log in</div>
+<div class="text">Log in</div>
+<div class="text">Log in</div>
+<div class="text">Log in</div>
+<div class="text">Log in</div>
+<div class="text">Log in</div>
+</body>
