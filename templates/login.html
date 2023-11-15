@@ -6,9 +6,13 @@
   font-style: normal;
   font-weight: normal;
 }
-body {
-  height: 100vh;
-  width: 100vw;
+body{
+    margin:0;
+
+}
+ .right-side{
+  height: 100%;
+  width: 70%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -16,8 +20,10 @@ body {
   margin: 0;
   padding: 0;
   background-color: black;
-  color: transparent;
+     color: transparent;
   font-family: "Avenir";
+    float: right;
+     border : 1px solid black;
 }
 
 .text {
@@ -106,9 +112,19 @@ body {
     filter: hue-rotate(50deg);
   }
 }
+
+.left-side {
+      width: 10%;
+      height: 70%;
+      float: left;
+    border : 1px solid black;
+    overflow:hidden;
+    }
+
 </style>
 </head>
 <body>
+<div class = "right-side">
 <div class="text">Log in</div>
 <div class="text">Log in</div>
 <div class="text">Log in</div>
@@ -119,4 +135,8 @@ body {
 <div class="text">Log in</div>
 <div class="text">Log in</div>
 <div class="text">Log in</div>
+</div>
+<div class = "left-side">
+    <h2>"DASDASD"</h2>
+</div>
 </body>
