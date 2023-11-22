@@ -13,6 +13,7 @@ body {
   font: 300 1rem/1.5 Helvetica Neue, sans-serif;
   margin: 0;
   min-height: 100%;
+
 }
  .right-side{
   height: 100%;
@@ -28,6 +29,16 @@ body {
   font-family: "Avenir";
     float: right;
 }
+ .left-side {
+      width: 30%;
+      height: 100%;
+      float: left;
+    margin:0;
+    overflow:hidden;
+    background-color: #663399;
+    display: flex;
+    justify-content: center;
+    }
 
 .text {
   font-variation-settings: "wght" 400, "wdth" 100;
@@ -117,6 +128,82 @@ body {
   }
 }
 
+
+.site__logo {
+  margin-bottom: 2rem;
+}
+
+input {
+  border: 0;
+  font: inherit;
+}
+input::placeholder {
+  color: #7e8ba3;
+}
+
+.form__field {
+  margin-bottom: 1rem;
+}
+.form input {
+  outline: 0;
+  padding: 0.5rem 1rem;
+}
+.form input[type=email], .form input[type=password] {
+  width: 100%;
+}
+
+h2 {
+  font-size: 2.75rem;
+  font-weight: 100;
+  margin: 0 0 1rem;
+  text-transform: uppercase;
+}
+
+svg {
+  height: auto;
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+a {
+  color: #7e8ba3;
+}
+
+.register {
+  display: block;
+  box-shadow: 0 10px 120px #000;
+     border-radius: 10px;
+    text-align: center;
+  margin: auto; /* This centers horizontally */
+  background-color: #663399;
+  color: white;
+  padding: 20px;
+}
+
+.register input {
+  border: 1px solid #242c37;
+  border-radius: 20px;
+  background-color: transparent;
+  text-align: center;
+}
+.register input[type=email], .register input[type=password] {
+  background-repeat: no-repeat;
+  background-size: 1.5rem;
+  background-position: 1rem 50%;
+}
+.register input[type=email] {
+  background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="#242c37"><path d="M256.017 273.436l-205.17-170.029h410.904l-205.734 170.029zm-.034 55.462l-205.983-170.654v250.349h412v-249.94l-206.017 170.245z"/></svg>');
+}
+.register input[type=password] {
+  background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="#242c37"><path d="M195.334 223.333h-50v-62.666c0-61.022 49.645-110.667 110.666-110.667 61.022 0 110.667 49.645 110.667 110.667v62.666h-50v-62.666c0-33.452-27.215-60.667-60.667-60.667-33.451 0-60.666 27.215-60.666 60.667v62.666zm208.666 30v208.667h-296v-208.667h296zm-121 87.667c0-14.912-12.088-27-27-27s-27 12.088-27 27c0 7.811 3.317 14.844 8.619 19.773 4.385 4.075 6.881 9.8 6.881 15.785v22.942h23v-22.941c0-5.989 2.494-11.708 6.881-15.785 5.302-4.93 8.619-11.963 8.619-19.774z"/></svg>');
+}
+.register input[type=submit] {
+  background-image: linear-gradient(160deg, #8ceabb 0%, #4169e1 100%);
+  color: #fff;
+  margin-bottom: 6rem;
+  width: 100%;
+}
+
 .left-side {
       width: 30%;
       height: 100%;
@@ -127,6 +214,7 @@ body {
     display: flex;
     justify-content: center;
     }
+
 
 .site__logo {
   margin-bottom: 2rem;
@@ -221,9 +309,22 @@ a {
 <div class = "left-side">
     <div class="register">
 
+
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 24 30" width="90" height="100" style="enable-background:new 0 0 24 24;" xml:space="preserve">
+    <g>
+        <path d="M0,15.5V16c0,0.827,0.673,1.5,1.5,1.5h21c0.827,0,1.5-0.673,1.5-1.5v-0.5H0z" fill="#8ceabb" />
+        <path d="M23.954,14.5c-0.224-1.803-1.604-2.99-2.817-3.528C21.092,10.985,21.049,11,21,11c-0.569,0-2.152,1.692-3.511,3.5H23.954z" fill="#8ceabb" />
+        <path d="M3.949,14.5c-0.245-1.692-1.691-3-3.449-3H0v3H3.949z" fill="#8ceabb" />
+        <path d="M17.588,9.68l-0.489-0.261l-0.652,1.304l-0.5,1C15.859,11.899,15.683,12,15.5,12c-0.075,0-0.151-0.017-0.223-0.053   c-0.247-0.124-0.347-0.424-0.224-0.671l0.5-1l0.664-1.328l-1.091-0.582l-0.678,1.357l-0.5,1C13.859,10.899,13.683,11,13.5,11   c-0.075,0-0.151-0.017-0.223-0.053c-0.247-0.124-0.347-0.424-0.224-0.671l0.5-1l0.69-1.38l-1.091-0.582l-0.705,1.409l-0.5,1   C11.859,9.899,11.683,10,11.5,10c-0.075,0-0.151-0.017-0.223-0.053c-0.247-0.124-0.347-0.424-0.224-0.671l0.5-1l0.715-1.43   C11.05,6.218,9.463,6.513,8.629,7.468C8.219,7.939,7.43,8.5,6,8.5c-1.58,0-2.388-0.67-2.788-1.233C2.87,6.787,2.328,6.5,1.76,6.5   H0.5C0.224,6.5,0,6.724,0,7v3.5h0.5c2.31,0,4.197,1.756,4.449,4h11.293c0.686-0.963,2.22-3.005,3.547-3.973   C18.986,10.299,18.245,10.031,17.588,9.68z" fill="#8ceabb" />
+    </g>
+</svg>
+
+      <h2>Log In</h2>
+
       <svg xmlns="http://www.w3.org/2000/svg" class="site__logo" width="56" height="84" viewBox="77.7 214.9 274.7 412"><defs><linearGradient id="a" x1="0%" y1="0%" y2="0%"><stop offset="0%" stop-color="#8ceabb"/><stop offset="100%" stop-color="#378f7b"/></linearGradient></defs><path fill="url(#a)" d="M215 214.9c-83.6 123.5-137.3 200.8-137.3 275.9 0 75.2 61.4 136.1 137.3 136.1s137.3-60.9 137.3-136.1c0-75.1-53.7-152.4-137.3-275.9z"/></svg>
 
       <h2>Sign Up</h2>
+
 
       <form action="" method="post" class="form">
 
