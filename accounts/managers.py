@@ -1,12 +1,16 @@
 from django.contrib.auth.base_user import BaseUserManager
+from rest_framework import serializers
 
 
 class CustomUserManager(BaseUserManager):
-    def create_user(self, email, password, **extras):
+    def create_user(self, email, password=None, **extra_fields):
         if not email:
             raise ValueError("Users must have an email address")
+        print(f"DEBUG: Before normalize_email, self.model: {self.model}")
         email = self.normalize_email(email)
-        user = self.model(email=email, **extras)
+        print(f"DEBUG: After normalize_email, self.model: {self.model}")
+
+        user = self.model(email=email, **extra_fields)
         user.set_password(password)
         user.save()
         return user
