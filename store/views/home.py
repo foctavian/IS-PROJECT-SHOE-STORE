@@ -49,6 +49,5 @@ def store(request):
         products = Product.get_all_products()
 
     data = {'products': products, 'categories': categories}
-
     print('you are : ', request.session.get('email'))
-    return render(request, 'index.html', data)
+    return render(request, 'shop/master.html', data)

@@ -1,0 +1,81 @@
+ body {
+  margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 200vh;
+      display: flex;
+     font-family: 'Poppins', sans-serif;
+  background-color: #000;
+  background-image: radial-gradient(circle at top right, rgba(121, 68, 154, 0.13), transparent), radial-gradient(circle at 20% 80%, rgba(41, 196, 255, 0.13), transparent);
+}
+
+canvas {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+}
+
+.header {
+  position: fixed;
+  z-index: 1000;
+  height: 100px;
+  width: 100%;
+  background: rgba(34,34,34,0.25);
+  padding: 18px;
+  -webkit-transition: all ease-out .5s;
+  -moz-transition: all ease-out .5s;
+  -o-transition: all ease-out .5s;
+  transition: all ease-out .5s;
+}
+
+.active {
+  background-color: rgba(34,34,34,0.8);
+}
+ul {
+  display: flex; /* Change from table to flex layout */
+  justify-content: center; /* Distribute list items evenly */
+  margin: 0 auto; /* Center the ul element within the header */
+  padding: 0;
+  list-style: none;
+  width: 100%; /* Stretch to full width of the header */
+  text-align: center; /* Center text alignment within list items */
+}
+li {
+  display: table-cell;
+  position: relative;
+  padding: 15px 0;
+}
+a {
+  color: #fff;
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 0.15em;
+
+  display: inline-block;
+  padding: 15px 20px;
+  position: relative;
+}
+a:after {
+  background: none repeat scroll 0 0 transparent;
+  bottom: 0;
+  content: "";
+  display: block;
+  height: 2px;
+  left: 50%;
+  position: absolute;
+  background: #fff;
+  transition: width 0.3s ease 0s, left 0.3s ease 0s;
+  width: 0;
+}
+a:hover:after {
+  width: 100%;
+  left: 0;
+}
+@media screen and (max-height: 300px) {
+	ul {
+		margin-top: 40px;
+	}
+}
+
+
+
