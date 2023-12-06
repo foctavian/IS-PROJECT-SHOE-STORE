@@ -19,7 +19,7 @@ def signup(request):
             return redirect('home')
         else:
             # Display the form errors
-            print("coaie.....")
+            print("error")
 
     else:
         form = CustomUserCreationForm()

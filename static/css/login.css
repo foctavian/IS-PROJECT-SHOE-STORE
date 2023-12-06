@@ -6,16 +6,14 @@
 }
 
 body {
-  /*color: #7e8ba3;*/
-    background: radial-gradient(circle at 30%, #663399, #663399 50%, #663399 25%, #83e8b6 75%);
-  font: 300 1rem/1.5 Helvetica Neue, sans-serif;
-  margin: 0;
-  min-height: 100%;
+ background-image:radial-gradient(circle at top right, rgba(121, 68, 154, 0.13), transparent), radial-gradient(circle at 20% 80%, rgba(41, 196, 255, 0.13), transparent);
+    background-color: #000;
+    width: 100%;
+  height: 100vh;
+    overflow: hidden;
 }
  .right-side{
-  /*background: radial-gradient(circle at 0%, #663399, #663399 50%, #83e8b6 75%, #83e8b6 75%);*/
-
-  height: 100%;
+   height: 100%;
   width: 70%;
   display: flex;
   align-items: center;
@@ -23,18 +21,19 @@ body {
   overflow: hidden;
   margin: 0;
   padding: 0;
-     color:transparent;
+     color: transparent;
   font-family: "Avenir";
-    float: right;
+    float: left;
 }
  .left-side {
       width: 30%;
       height: 100%;
       float: left;
-     margin:0;
+    margin:0;
     overflow:hidden;
     display: flex;
     justify-content: center;
+     color: transparent;
     }
 
 .text {
@@ -52,61 +51,61 @@ body {
   z-index: 0;
 }
 
-.text:nth-child(2) {
-  animation-delay: 0.3s;
-  opacity: 0.6;
-  -webkit-text-stroke: 5px #88e9b8;
-  z-index: -1;
-}
+/*.text:nth-child(2) {*/
+/*  animation-delay: 0.3s;*/
+/*  opacity: 0.6;*/
+/*  -webkit-text-stroke: 5px #88e9b8;*/
+/*  z-index: -1;*/
+/*}*/
 
-.text:nth-child(3) {
-  animation-delay: 0.45s;
-  opacity: 0.4;
-  -webkit-text-stroke: 5px #86e9b7;
-  z-index: -2;
-}
+/*.text:nth-child(3) {*/
+/*  animation-delay: 0.45s;*/
+/*  opacity: 0.4;*/
+/*  -webkit-text-stroke: 5px #86e9b7;*/
+/*  z-index: -2;*/
+/*}*/
 
-.text:nth-child(4) {
-  animation-delay: 0.6s;
-  opacity: 0.2;
-  -webkit-text-stroke: 5px #83e8b6;
-  z-index: -3;
-}
+/*.text:nth-child(4) {*/
+/*  animation-delay: 0.6s;*/
+/*  opacity: 0.2;*/
+/*  -webkit-text-stroke: 5px #83e8b6;*/
+/*  z-index: -3;*/
+/*}*/
 
-.text:nth-child(5) {
-  animation-delay: 0.75s;
-  opacity: 0;
-  -webkit-text-stroke: 5px #81e8b5;
-  z-index: -4;
-}
+/*.text:nth-child(5) {*/
+/*  animation-delay: 0.75s;*/
+/*  opacity: 0;*/
+/*  -webkit-text-stroke: 5px #81e8b5;*/
+/*  z-index: -4;*/
+/*}*/
 
-.text:nth-child(6) {
-  animation-delay: 0.9s;
-  opacity: 0.2;
-  -webkit-text-stroke: 5px #7fe8b3;
-  z-index: -5;
-}
+/*.text:nth-child(6) {*/
+/*  animation-delay: 0.9s;*/
+/*  opacity: 0.2;*/
+/*  -webkit-text-stroke: 5px #7fe8b3;*/
+/*  z-index: -5;*/
+/*}*/
 
-.text:nth-child(7) {
-  animation-delay: 1.05s;
-  opacity: 0.4;
-  -webkit-text-stroke: 5px #7de7b2;
-  z-index: -6;
-}
+/*.text:nth-child(7) {*/
+/*  animation-delay: 1.05s;*/
+/*  opacity: 0.4;*/
+/*  -webkit-text-stroke: 5px #7de7b2;*/
+/*  z-index: -6;*/
+/*}*/
 
-.text:nth-child(8) {
-  animation-delay: 1.2s;
-  opacity: 0.6;
-  -webkit-text-stroke: 5px #7be7b1;
-  z-index: -7;
-}
+/*.text:nth-child(8) {*/
+/*  animation-delay: 1.2s;*/
+/*  opacity: 0.6;*/
+/*  -webkit-text-stroke: 5px #7be7b1;*/
+/*  z-index: -7;*/
+/*}*/
 
-.text:nth-child(9) {
-  animation-delay: 1.35s;
-  opacity: 0.8;
-  -webkit-text-stroke: 5px #79e6b0;
-  z-index: -8;
-}
+/*.text:nth-child(9) {*/
+/*  animation-delay: 1.35s;*/
+/*  opacity: 0.8;*/
+/*  -webkit-text-stroke: 5px #79e6b0;*/
+/*  z-index: -8;*/
+/*}*/
 
 
 @keyframes text-flow {
@@ -140,6 +139,7 @@ input::placeholder {
 
 .form__field {
   margin-bottom: 1rem;
+    position: relative;
 }
 .form input {
   outline: 0;
@@ -168,12 +168,15 @@ a {
 
 .register {
   display: block;
+  box-shadow: 0 10px 120px #000;
      border-radius: 10px;
     text-align: center;
   margin: auto; /* This centers horizontally */
-  color: transparent;
-  padding: 20px;
-    box-shadow: 0 10px 10px #000;
+  background-color: #000;
+    background-image:radial-gradient(circle at top left, rgba(121, 68, 154, 0.13), transparent), radial-gradient(circle at 20% 80%, rgba(41, 196, 255, 0.13), transparent);
+  color: white;
+  padding: 30px;
+    width: 400px;
 }
 
 .register input {
@@ -286,7 +289,22 @@ a {
   width: 100%;
 }
 
+.form-group{
+    margin-bottom: 20px;
+}
 
+.form-group label{
+     display: flex;
+  margin-bottom: 10px;
+}
+
+.form-group input{
+    width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+    color:white;
+}
 
 
 .login_writing {
