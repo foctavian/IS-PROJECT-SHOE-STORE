@@ -8,9 +8,7 @@ from django.views import View
 
 
 def login(request):
-    return_url = None
     form = None
-
     if request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')
@@ -18,7 +16,7 @@ def login(request):
         if user:
             if password == user.password:
                 request.session['user'] = user.id
-                return redirect('store')
+                return render(request, 'shop/master.html', {'user': user})
     else:
         form = CustomUserLoginForm()
     return render(request, 'login.html', {'form': form})
