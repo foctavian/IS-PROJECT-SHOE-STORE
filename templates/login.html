@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 {%  load static  %}
 <head>
 <link rel="stylesheet" href="{% static 'css/login.css' %}">
@@ -30,26 +31,26 @@
 
       <h3 class = "login_writing">Log In</h3>
 
+{% block content %}
 
-
-      <form action="" method="post" class="form">
+      <form action="" method="post" class="form-container" , autocomplete="off">
         {% csrf_token %}
-          {{ form.as_p }}
-        <div class="form__field">
-          <input type="email" placeholder="info@mailaddress.com">
-        </div>
 
-        <div class="form__field">
-          <input type="password" placeholder="••••••••••••">
-        </div>
-
-        <div class="form__field">
+          <div class = "form-group">
+              <label for="id_email">Email:</label>
+              {{ form.email }}
+          </div>
+          <div class = "form-group">
+              <label for="id_password">Password:</label>
+              {{ form.password }}
+          </div>
+        <div id="form__field">
           <input type="submit" value="Log In">
         </div>
 
       </form>
 
     </div>
-
+{% endblock %}
 </div>
 </body>
