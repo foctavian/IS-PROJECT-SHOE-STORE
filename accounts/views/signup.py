@@ -12,9 +12,10 @@ def signup(request):
         email = request.POST.get('email')
         password1 = request.POST.get('password1')
         password2 = request.POST.get('password2')
-
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
         if password1 ==  password2 and password1 and password2:
-            user = User(email=email, password=password1, last_name='tavi')
+            user = User(email=email, password=password1, last_name=last_name, first_name=first_name)
             user.save()
             return redirect('home')
         else:

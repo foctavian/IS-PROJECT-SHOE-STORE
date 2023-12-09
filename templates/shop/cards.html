@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product Card</title>
+<link rel="stylesheet" href="{% static 'css/cards.css' %}">
+<link rel="stylesheet" href="{% static 'css/magic.css' %}">
+
+</head>
+<body>
+<div class = 'container'>
+    {% for product in products %}
+  <div class="product-card", id = 'product-card'>
+    <img src="static/{{ product.images }}" alt="Product Image">
+    <div class="product-info">
+      <h2>{{product.name}}</h2>
+    </div>
+  </div>
+
+    {% endfor %}
+</div>
+
+<script>
+ document.addEventListener("DOMContentLoaded", function () {
+    var productCards = document.querySelectorAll(".product-card");
+
+    productCards.forEach(function (card) {
+      card.addEventListener("click", function () {
+        callingFunction(card);
+      });
+
+    });
+  });
+
+  async function callingFunction(card) {
+    await swashAnimation(card);
+    redirectToProductPage('store/men_shoes');
+  }
+
+  function redirectToProductPage(url) {
+    window.location.href = url;
+  }
+
+  function swashAnimation(card) {
+    card.classList.add('magictime', 'magic');
+    return new Promise((resolve) => {
+      card.addEventListener('animationend', resolve);
+    });
+  }
+
+</script>
+</body>
+</html>
