@@ -1,6 +1,7 @@
 from django import template
 
 from store.models.shoe import Shoe
+from store.models.category import Category
 
 register = template.Library()
 
@@ -35,3 +36,13 @@ def size_filter(*filtered_sizes):
 @register.filter(name="name_filter")
 def name_filter(name):
     return Shoe.objects.filter(name__icontains=name)
+
+
+@register.filter(name="category_name")
+def get_category_name(name):
+    try:
+        shoe = Shoe.objects.get(name=name)
+        category = shoe.category.category
+        return category
+    except Shoe.DoesNotExist:
+        return ''

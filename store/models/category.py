@@ -16,8 +16,7 @@ class Category(models.Model):
         (OTHER, 'OTHER'),
     ]
     category = models.CharField(max_length=100, choices=CATEGORY_CHOICES, default='OTHER')
+
     @staticmethod
     def get_all_categories():
         return Category.objects.all()
-
-
