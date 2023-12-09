@@ -4,7 +4,7 @@ from django.contrib.auth.hashers import check_password
 from store.models.customer import Customer
 from django.views import View
 
-from store.models.product import Product
+from store.models.shoe import Shoe
 from store.models.order import Order
 
 
@@ -14,7 +14,7 @@ class CheckOut(View):
         phone = request.POST.get('phone')
         customer = request.session.get('customer')
         cart = request.session.get('cart')
-        products = Product.get_products_by_ids(list(cart.keys()))
+        products = Shoe.get_products_by_ids(list(cart.keys()))
         print(address, phone, customer, cart, products)
 
         for product in products:

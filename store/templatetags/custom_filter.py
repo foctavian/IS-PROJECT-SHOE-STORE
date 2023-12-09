@@ -1,11 +1,13 @@
 from django import template
 
+from store.models.shoe import Shoe
+
 register = template.Library()
 
 
 @register.filter(name='currency')
 def currency(number):
-    return "Rs " + str(number)
+    return "RON " + str(number)
 
 
 @register.filter(name='multiply')
@@ -17,7 +19,19 @@ def multiply(number, number1):
 def total_price(amount, price):
     return amount * price
 
-@register.filter(name = "total_order_price")
+
+@register.filter(name="total_order_price")
 def total_order_price(order):
     sum = 0
 
+
+@register.filter(name="size_filter")
+def size_filter(*filtered_sizes):
+    shoe = Shoe.objects.all()
+    sizes = shoe.size.split(',')  # REFACTOR THIS
+    return [shoe for size in sizes if size in filtered_sizes]
+
+
+@register.filter(name="name_filter")
+def name_filter(name):
+    return Shoe.objects.filter(name__icontains=name)
