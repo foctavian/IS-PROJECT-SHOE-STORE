@@ -1,3 +1,4 @@
+from django.template.defaulttags import url
 from django.urls import path
 
 from store.views.cart import Cart
@@ -6,14 +7,14 @@ from .views.checkout import CheckOut
 from .views.home import store, men_store
 from .views.orders import OrderView
 from accounts.views.signup import signup
+from store.views.shoeview import product_detail_view
 
 
 urlpatterns = [
-    # path('', Index.as_view(), name='homepage'),
     path('store', store, name='store'),
     path('signup', signup, name='signup'),
     path('cart', auth_middleware(Cart.as_view()), name='cart'),
     path('check-out', CheckOut.as_view(), name='checkout'),
     path('orders', auth_middleware(OrderView.as_view()), name='orders'),
-    path('store/men_shoes', men_store, name='men_shoes')
+    path('product/<int:product_id>', product_detail_view, name='products_details'),
 ]

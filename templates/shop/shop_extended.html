@@ -1,4 +1,5 @@
 {% load static %}
+{% load custom_filter %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,16 +9,15 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 </head>
 <body>
-    <h1 >{{ product.name }} {{ product.price }}</h1>
   <div class = 'content-cards'>
          <div class="container">
         <div class="imgBx">
-            <img src="https://github.com/anuzbvbmaniac/Responsive-Product-Card---CSS-ONLY/blob/master/assets/img/jordan_proto.png?raw=true" alt="Nike Jordan Proto-Lyte Image">
+            <img src="../static/{{product.images}}" alt="{{ product.name }}">
         </div>
         <div class="details">
             <div class="content">
-                <h2>Jordan Proto-Lyte <br>
-                    <span>Running Collection</span>
+                <h2>{{ product.name }}<br>
+                    <span>{{ product.name|category_name}} Collection</span>
                 </h2>
                 <p>
                     Featuring soft foam cushioning and lightweight, woven fabric in the upper, the Jordan Proto-Lyte is
@@ -32,7 +32,7 @@
                     <span class="red" data-color-primary="#7E021C" data-color-sec="#bd072d" data-pic="https://github.com/anuzbvbmaniac/Responsive-Product-Card---CSS-ONLY/blob/master/assets/img/jordan_proto_red_black.png?raw=true"></span>
                     <span class="orange" data-color-primary="#CE5B39" data-color-sec="#F18557" data-pic="https://github.com/anuzbvbmaniac/Responsive-Product-Card---CSS-ONLY/blob/master/assets/img/jordan_proto_orange_black.png?raw=true"></span>
                 </p>
-                <h3>Rs. 12,800</h3>
+                <h3>RON. 12,800</h3>
                 <button class = "cart-button">Add to cart</button>
             </div>
         </div>

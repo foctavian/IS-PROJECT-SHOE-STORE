@@ -2,7 +2,7 @@ from django.db import models
 from .category import Category
 from .brand import Brand
 from .gender import Gender
-
+from django import template
 
 class Shoe(models.Model):
     name = models.CharField(max_length=100)
@@ -42,3 +42,8 @@ class Shoe(models.Model):
         shoe = Shoe.objects.get(name=name)
         colors = shoe.colors.split(',')
         return colors
+
+
+
+    def get_absolute_url(self):
+        return f"product/{self.id}"

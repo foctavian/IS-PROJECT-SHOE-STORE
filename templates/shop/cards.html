@@ -12,7 +12,7 @@
 <body>
 <div class = 'container'>
     {% for product in products %}
-  <div class="product-card", id = 'product-card'>
+  <div class="product-card", id = 'product-card' data-product-id = {{ product.id }}>
     <img src="static/{{ product.images }}" alt="Product Image">
     <div class="product-info">
       <h2>{{product.name}}</h2>
@@ -36,7 +36,9 @@
 
   async function callingFunction(card) {
     await swashAnimation(card);
-    redirectToProductPage('store/men_shoes');
+    const id = card.dataset.productId;
+    const url = `/product/${id}`
+    redirectToProductPage(url);
   }
 
   function redirectToProductPage(url) {
@@ -44,7 +46,7 @@
   }
 
   function swashAnimation(card) {
-    card.classList.add('magictime', 'magic');
+    card.classList.add('magictime', 'swashOut');
     return new Promise((resolve) => {
       card.addEventListener('animationend', resolve);
     });
