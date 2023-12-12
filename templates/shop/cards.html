@@ -35,7 +35,6 @@
   });
 
   async function callingFunction(card) {
-    await swashAnimation(card);
     const id = card.dataset.productId;
     const url = `/product/${id}`
     redirectToProductPage(url);
@@ -43,13 +42,6 @@
 
   function redirectToProductPage(url) {
     window.location.href = url;
-  }
-
-  function swashAnimation(card) {
-    card.classList.add('magictime', 'swashOut');
-    return new Promise((resolve) => {
-      card.addEventListener('animationend', resolve);
-    });
   }
 
 </script>

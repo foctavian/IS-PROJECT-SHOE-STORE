@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.contrib.auth.hashers import check_password
+from django.urls import reverse
 
 from accounts.forms import CustomUserLoginForm
 from accounts.models import User
@@ -16,7 +17,8 @@ def login(request):
         if user:
             if password == user.password:
                 request.session['user'] = user.id
-                return render(request, 'shop/master.html', {'user': user})
+                # return render(request, 'shop/master.html', {'user': user})
+                return  redirect('store')
     else:
         form = CustomUserLoginForm()
     return render(request, 'login.html', {'form': form})

@@ -32,8 +32,9 @@
                     <span class="red" data-color-primary="#7E021C" data-color-sec="#bd072d" data-pic="https://github.com/anuzbvbmaniac/Responsive-Product-Card---CSS-ONLY/blob/master/assets/img/jordan_proto_red_black.png?raw=true"></span>
                     <span class="orange" data-color-primary="#CE5B39" data-color-sec="#F18557" data-pic="https://github.com/anuzbvbmaniac/Responsive-Product-Card---CSS-ONLY/blob/master/assets/img/jordan_proto_orange_black.png?raw=true"></span>
                 </p>
-                <h3>RON. 12,800</h3>
+                <h3>RON 12</h3>
                 <button class = "cart-button">Add to cart</button>
+                <button class = "back-button" type="button" onClick=refreshPage()>X</button>
             </div>
         </div>
     </div>
@@ -59,6 +60,11 @@
         selector.classList.add('magictime', 'foolishIn')
     }
     setTimeout(foolishAnimation, 100);
+
+    function refreshPage(){
+        window.history.back();
+    }
+
 </script>
     <script src="{% static 'js/addToCart.js' %}"></script>
 

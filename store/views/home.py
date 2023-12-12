@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect, HttpResponseRedirect
+
+from accounts.models import User
 from store.models.shoe import Shoe
 from store.models.category import Category
 from django.views import View
@@ -43,13 +45,15 @@ def store(request):
     products = None
     categories = Category.get_all_categories()
     categoryID = request.GET.get('category')
+    user = User.objects.get(pk=request.session.get('user'))
     if categoryID:
         products = Shoe.get_all_products_by_categoryid(categoryID)
     else:
         products = Shoe.get_all_products()
 
-    data = {'products': products}
-    print('you are : ', request.session.get('email'))
+    data = {'products': products, 'user': user}
+
+    # print('you are : ', request.session.get('email'))
     return render(request, 'shop/master.html', data)
 
 

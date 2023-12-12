@@ -174,6 +174,20 @@ h1{
     }
 }
 
+.back-button {
+  float: left;
+  display: inline-block;
+  outline: none;
+  padding: 15px 20px;
+  margin-top: 5px;
+  font-size: 16px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-right: 20px;
+  border-radius: 40px;
+}
+
 .cart-button {
   font-family: "Helvetica", "Arial", sans-serif;
   display: inline-block;
@@ -186,7 +200,9 @@ h1{
     font-weight: 600;
     border-radius: 40px;
     float: right;
+    margin-left:20px;
 }
+
 .cart-button:focus {
   outline: 0;
 }
