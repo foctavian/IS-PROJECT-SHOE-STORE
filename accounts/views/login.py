@@ -17,8 +17,7 @@ def login(request):
         if user:
             if password == user.password:
                 request.session['user'] = user.id
-                # return render(request, 'shop/master.html', {'user': user})
-                return  redirect('store')
+                return redirect('store')
     else:
         form = CustomUserLoginForm()
     return render(request, 'login.html', {'form': form})

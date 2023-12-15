@@ -34,7 +34,6 @@ class Index(View):
         return redirect('homepage')
 
     def get(self, request):
-        # print()
         return HttpResponseRedirect(f'/store{request.get_full_path()[1:]}')
 
 
@@ -45,15 +44,18 @@ def store(request):
     products = None
     categories = Category.get_all_categories()
     categoryID = request.GET.get('category')
-    user = User.objects.get(pk=request.session.get('user'))
+    try:
+        user = User.objects.get(pk=request.session.get('user'))
+    except User.DoesNotExist:
+        user = None
     if categoryID:
         products = Shoe.get_all_products_by_categoryid(categoryID)
     else:
         products = Shoe.get_all_products()
-
+    print("You are: ", user)
+    request.session['user'] = user
     data = {'products': products, 'user': user}
 
-    # print('you are : ', request.session.get('email'))
     return render(request, 'shop/master.html', data)
 
 

@@ -4,6 +4,7 @@ from .brand import Brand
 from .gender import Gender
 from django import template
 
+
 class Shoe(models.Model):
     name = models.CharField(max_length=100)
     price = models.IntegerField(default=0)
@@ -15,6 +16,7 @@ class Shoe(models.Model):
     description = models.CharField(max_length=500, default=0)
     brand = models.ForeignKey(Brand, on_delete=models.DO_NOTHING)
     gender = models.ForeignKey(Gender, on_delete=models.DO_NOTHING, default='UNISEX')
+    sale = models.BooleanField(default=0)
 
     @staticmethod
     def get_products_by_ids(ids):
@@ -31,19 +33,23 @@ class Shoe(models.Model):
         else:
             return Shoe.get_all_products()
 
-    @staticmethod
-    def parse_sizes(name):
-        shoe = Shoe.objects.get(name=name)
-        sizes = shoe.size.split(',')
-        return sizes
+    def get_first_color(self):
+        return self.colors.split(',')[0]
 
     @staticmethod
     def parse_colors(name):
         shoe = Shoe.objects.get(name=name)
         colors = shoe.colors.split(',')
+        print(colors)
         return colors
-
-
 
     def get_absolute_url(self):
         return f"product/{self.id}"
+
+    def compute_price_after_sale(self):
+        self.price = self.price - (self.price * self.sale / 100)
+
+    @staticmethod
+    def insert_object(self):
+        self.compute_price_after_sale()
+        self.save()

@@ -46,3 +46,14 @@ def get_category_name(name):
         return category
     except Shoe.DoesNotExist:
         return ''
+
+
+@register.filter(name="colors_filter_display")
+def colors_filter_display(name):
+    try:
+        shoe = Shoe.objects.get(name=name)
+        colors = shoe.colors.split(',')
+        print(colors)
+        return colors
+    except Shoe.DoesNotExist:
+        return ''
