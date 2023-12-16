@@ -8,3 +8,4 @@ class Cart(models.Model):
     item = models.ForeignKey(Shoe, on_delete=models.CASCADE, default=None)
     quantity = models.IntegerField(default=1)
 
+

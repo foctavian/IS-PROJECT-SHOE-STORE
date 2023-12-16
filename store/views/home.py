@@ -41,8 +41,6 @@ def store(request):
     cart = request.session.get('cart')
     if not cart:
         request.session['cart'] = {}
-    products = None
-    categories = Category.get_all_categories()
     categoryID = request.GET.get('category')
     try:
         user = User.objects.get(pk=request.session.get('user'))
@@ -52,8 +50,7 @@ def store(request):
         products = Shoe.get_all_products_by_categoryid(categoryID)
     else:
         products = Shoe.get_all_products()
-    print("You are: ", user)
-    request.session['user'] = user
+
     data = {'products': products, 'user': user}
 
     return render(request, 'shop/master.html', data)
