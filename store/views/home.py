@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect, HttpResponseRedirect
+
+from accounts.models import User
 from store.models.shoe import Shoe
 from store.models.category import Category
 from django.views import View
@@ -32,7 +34,6 @@ class Index(View):
         return redirect('homepage')
 
     def get(self, request):
-        # print()
         return HttpResponseRedirect(f'/store{request.get_full_path()[1:]}')
 
 
@@ -40,16 +41,18 @@ def store(request):
     cart = request.session.get('cart')
     if not cart:
         request.session['cart'] = {}
-    products = None
-    categories = Category.get_all_categories()
     categoryID = request.GET.get('category')
+    try:
+        user = User.objects.get(pk=request.session.get('user'))
+    except User.DoesNotExist:
+        user = None
     if categoryID:
         products = Shoe.get_all_products_by_categoryid(categoryID)
     else:
         products = Shoe.get_all_products()
 
-    data = {'products': products}
-    print('you are : ', request.session.get('email'))
+    data = {'products': products, 'user': user}
+
     return render(request, 'shop/master.html', data)
 
 

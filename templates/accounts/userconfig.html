@@ -1,0 +1,18 @@
+{% load rest_framework %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Config</title>
+</head>
+<body>
+    <h1> Profile {{ user.name }} </h1>
+    <form action = "{%  url 'user_config/' user.id %}" method = "POST" class = "form">
+        {% csrf_token %}
+        <input type = "text" name = "email" placeholder = "Email">
+        <input type = "text" name = "password" placeholder = "New Password">
+        <input type = "text" name = "password2" placeholder = "Confirm Password">
+        <input type = "submit" value = "Submit">
+</form>
+</body>
+</html>

@@ -13,7 +13,7 @@
 <div class = 'container'>
     {% for product in products %}
   <div class="product-card", id = 'product-card' data-product-id = {{ product.id }}>
-    <img src="static/{{ product.images }}" alt="Product Image">
+    <img src="static/images/{{ product.get_first_color }}_{{ product.images }}" alt="Product Image">
     <div class="product-info">
       <h2>{{product.name}}</h2>
     </div>
@@ -25,7 +25,6 @@
 <script>
  document.addEventListener("DOMContentLoaded", function () {
     var productCards = document.querySelectorAll(".product-card");
-
     productCards.forEach(function (card) {
       card.addEventListener("click", function () {
         callingFunction(card);
@@ -35,7 +34,6 @@
   });
 
   async function callingFunction(card) {
-    await swashAnimation(card);
     const id = card.dataset.productId;
     const url = `/product/${id}`
     redirectToProductPage(url);
@@ -43,13 +41,6 @@
 
   function redirectToProductPage(url) {
     window.location.href = url;
-  }
-
-  function swashAnimation(card) {
-    card.classList.add('magictime', 'swashOut');
-    return new Promise((resolve) => {
-      card.addEventListener('animationend', resolve);
-    });
   }
 
 </script>

@@ -27,8 +27,11 @@
                     <td><img style="height: 80px;" class="rounded-circle" src="{{product.image.url}}" alt=""></td>
                     <td>{{product.name}}</td>
                     <td>{{product.price|currency}}</td>
-                    <td>{{product|cart_quantity:request.session.cart}}</td>
-                    <td>{{product|price_total:request.session.cart|currency}}</td>
+                    <td>{{product.id|cart_quantity:cart}}</td>
+                    <td>
+                        {% price_total product.price product.id cart  as price %}
+                        {{ price|currency }}
+                    </td>
                 </tr>
 
                 {% endfor %}

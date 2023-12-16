@@ -26,7 +26,7 @@
             <div class="two"></div>
             <div class="three"></div>
         </div>
-        <a >Men Shoes</a>
+        <a>Men Shoes</a>
         <a>Women Shoes</a>
         <a>Sales</a>
         <a>About</a>
@@ -35,11 +35,10 @@
 
         <div class = "logged-in-user">
         {% if user.is_authenticated %}
-            <h2>Welcome {{ user.last_name }} {{user.first_name }} !</h2>
+            <a href = 'user_config/{{user.id}}'>Welcome {{ user.last_name }} {{user.first_name }} !</a>
         {% else %}
-            <h2>Welcome Guest!</h2>
-        {% endif %}
-    </div>
+            <a href = "{% url 'signup' %}">Welcome Guest!</a>
+        {% endif%}</div>
 
 
 </header>
