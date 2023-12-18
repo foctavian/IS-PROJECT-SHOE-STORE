@@ -25,10 +25,12 @@ class CustomUserCreationForm(UserCreationForm):
         return password2
 
 
-class CustomUserChangeForm(UserChangeForm):
+class CustomUserChangeForm(forms.Form):
+    email = forms.EmailField(max_length=255, required=True)
+
     class Meta:
         model = User
-        fields = ('email', 'role')
+        fields = ('email', 'password1', 'password2')
 
 
 class CustomUserLoginForm(forms.Form):

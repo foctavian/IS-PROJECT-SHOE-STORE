@@ -82,7 +82,22 @@
                     <label for="">Phone</label>
                     <input type="text" name="phone" id="" class="form-control" placeholder="" aria-describedby="helpId">
                   </div>
-
+                <div class = "form-payment">
+                    <label for="">Payment Method : </label>
+                    <tr>
+                    <td><input type = "checkbox" name = "check"></td>
+                    <td><label for="">Cash on Delivery</label></td>
+                        <td><input type = "checkbox" name = "check"></td>
+                    <td><label for="">Card</label></td>
+                    </tr>
+                </div>
+                <div class = "form-shipment">
+                    <label for="">Shipment Method : </label>
+                    {% for k,v in shipment.items %}
+                        <td><input type = "checkbox" name = "check"></td>
+                        <td><label for ="">{{ v }}</label></td>
+                    {% endfor %}
+                </div>
                   <input type="submit" class="btn float-right btn-outline-success col-lg-6" value="Check out">
             </form>
           </div>
