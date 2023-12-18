@@ -11,4 +11,4 @@ class Payment(models.Model):
         ]
 
     payment_method = models.CharField(max_length=100, choices=payment_choices, default='CASH')
-    status = models.BooleanField(default=False)
+    price = models.IntegerField(default=0)

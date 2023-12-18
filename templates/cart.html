@@ -42,7 +42,7 @@
                 <tr>
                     <th colspan="4"></th>
                     <th class="" colspan="">Total</th>
-                    <th>{{products|total_cart_price:request.session.cart|currency}}</th>
+                    <th>{% total_cart_price products cart %}</th>
                 </tr>
             </tfoot>
         </table>
@@ -61,6 +61,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
+            {% csrf_token %}
           <h5 class="modal-title" id="exampleModalLabel">
               Check Out Form
           </h5>
@@ -75,30 +76,28 @@
                 {% csrf_token %}
                 <div class="form-group">
                   <label for="">Address</label>
-                  <input type="text" name="address" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                  <input type="text" id="address" class="form-control" placeholder="" aria-describedby="helpId">
                   
                 </div>
                 <div class="form-group">
                     <label for="">Phone</label>
-                    <input type="text" name="phone" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                    <input type="text" id="phone"  class="form-control" placeholder="" aria-describedby="helpId">
                   </div>
                 <div class = "form-payment">
                     <label for="">Payment Method : </label>
-                    <tr>
-                    <td><input type = "checkbox" name = "check"></td>
-                    <td><label for="">Cash on Delivery</label></td>
-                        <td><input type = "checkbox" name = "check"></td>
-                    <td><label for="">Card</label></td>
-                    </tr>
+                    {% for payment_method in payment %}
+                        <tr><input type = "checkbox" name = "payment"></tr>
+                        <tr><label for="">{{ payment_method }}</label></tr>
+                    {% endfor %}
                 </div>
                 <div class = "form-shipment">
                     <label for="">Shipment Method : </label>
-                    {% for k,v in shipment.items %}
-                        <td><input type = "checkbox" name = "check"></td>
-                        <td><label for ="">{{ v }}</label></td>
+                    {% for company,price in shipment %}
+                        <tr><input type = "checkbox" name = "shipping" class = "shipment-checkbox"></tr>
+                        <tr><label for="">{{ company }} {{ price }}</label></tr>
                     {% endfor %}
                 </div>
-                  <input type="submit" class="btn float-right btn-outline-success col-lg-6" value="Check out">
+                  <input type="button" id = "submit" class="btn float-right btn-outline-success col-lg-6" value="Check out" >
             </form>
           </div>
         </div>
@@ -107,6 +106,43 @@
     </div>
   </div>
 
+    <script>
+    document.getElementById("submit").addEventListener('click', placeOrder);
+
+    function placeOrder(){
+        var selected_shipping_company = $('.shipment-checkbox:checked').map(function() {
+    return [ $(this).next('label').text(), this.value ];
+}).get();
+        var selected_payment_method = $('.payment-checkbox:checked').map(function() {
+    return [ $(this).next('label').text(), this.value ];
+}).get();
+
+        if (selected_shipping_company == null || selected_payment_method == null){
+            alert("Please select payment and shipping method");
+
+        }
+        else {
+            const items = {
+                'user': {{ user }},
+                'shipping-company': selected_shipping_company,
+                'payment' : selected_payment_method,
+                'address' : document.getElementById("address").value,
+                'phone' : document.getElementById("phone").value,
+            };
+
+            fetch(`http://localhost:8000/place_order/${items['user']}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(items),
+            }).then(response => response.json())
+                .then((data) => {
+                    console.log('Order sent: ', data);
+                })
+        }
+    }
+    </script>
 
 
 {% endblock %}

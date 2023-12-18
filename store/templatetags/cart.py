@@ -26,6 +26,12 @@ def price_total( price,product_id,cart):
             return price * q
 
 
-@register.filter(name='total_cart_price')
-def total_cart_price(products, cart):
-    return 0
+@register.simple_tag(name='total_cart_price')
+def total_cart_price(products,cart):
+    total =0
+    for p in products:
+        total += price_total(p.price,p.id,cart)
+
+    return total
+
+

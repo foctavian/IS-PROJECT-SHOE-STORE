@@ -10,7 +10,7 @@ from django.views import View
 from store.models.shoe import Shoe
 from store.models.order import Order
 from store.models.cart import Cart
-
+from store.models.cart import get_items_by_user
 
 class OrderView(View):
 
@@ -24,6 +24,8 @@ class OrderView(View):
 @csrf_exempt
 @require_POST
 def add_to_cart(request, product_id):
+    response = JsonResponse({'success': True})
+    response['Access-Control-Allow-Origin'] = '*'
     try:
         data = json.loads(request.body)
         # data load ids so i have to get the objects
@@ -50,5 +52,35 @@ def add_to_cart(request, product_id):
             cart_item.quantity += quantity
             cart_item.save()
             return JsonResponse({'message': 'Increased quantity of item in cart successfully!', 'cart_item': cart_item.id})
+    except json.JSONDecodeError:
+        return JsonResponse({'error': 'Invalid data...'}, status=400)
+
+
+@csrf_exempt
+@require_POST
+def order(request, user_id):
+    try:
+        #get the user
+        data = json.loads(request.body)
+        user = data.get('user')
+        shipment = data.get('shipment-company')
+        payment = data.get('payment')
+        address = data.get('address')
+        phone = data.get('phone')
+        print(address)
+        print(phone)
+        # if user == user_id:
+        #     cart_items = get_items_by_user(user_id)
+        #     for item in cart_items:
+        #         order = Order.objects.create()
+        #
+        #     # order = Order.objects.create(
+        #     #     user_id=user,
+        #     #     shipment_company_id=shipment,
+        #     #     payment_method_id=payment
+        #     # )
+        # else: raise Exception('Invalid user')
+
+        return JsonResponse({'message': 'Order placed successfully!'})
     except json.JSONDecodeError:
         return JsonResponse({'error': 'Invalid data...'}, status=400)
