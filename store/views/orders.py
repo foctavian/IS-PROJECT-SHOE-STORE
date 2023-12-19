@@ -1,4 +1,5 @@
 import json
+from datetime import datetime
 
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
@@ -8,8 +9,9 @@ from django.views.decorators.http import require_POST
 from accounts.models import User
 from django.views import View
 from store.models.shoe import Shoe
-from store.models.order import Order
-from store.models.cart import Cart
+from store.models.order import Order, OrderProduct, PLACED, CANCELLED, DELIVERED, FINISHED
+from store.models.cart import Cart, delete_cart_after_order
+from store.models.cart import get_items_by_user
 
 
 class OrderView(View):
@@ -49,6 +51,55 @@ def add_to_cart(request, product_id):
             cart_item = cart.first()
             cart_item.quantity += quantity
             cart_item.save()
-            return JsonResponse({'message': 'Increased quantity of item in cart successfully!', 'cart_item': cart_item.id})
+            return JsonResponse(
+                {'message': 'Increased quantity of item in cart successfully!', 'cart_item': cart_item.id})
+    except json.JSONDecodeError:
+        return JsonResponse({'error': 'Invalid data...'}, status=400)
+
+
+@csrf_exempt
+@require_POST
+def order(request, user_id):
+    try:
+        # get the user
+        data = json.loads(request.body)
+        user = data.get('user')
+        shipment = data.get('shipment-company')
+        payment = data.get('payment')
+        address = data.get('address')
+        phone = data.get('phone')
+
+        if user == user_id:
+            date = datetime.today()
+            cart_items = get_items_by_user(user_id)
+
+            new_order = Order.objects.create(
+                user_id=user,
+                address=address,
+                phone=phone,
+                date=date,
+                status=PLACED,
+                payment_method_id=1,
+                shipment_company_id=1
+            )
+            # new_order.placeOrder()
+            order_id = Order.objects.get(user_id=user_id, date=date)
+
+            for item in cart_items:
+                shoe = Shoe.objects.get(id=int(item['item_id']))
+                # shoe_id = shoe[0]["id"]
+                order_product = OrderProduct.objects.create(
+                    product=shoe,
+                    price=0,
+                    quantity=item['quantity'],
+                    order_id=order_id
+                )
+                order_product.save()
+            # delete the cart after order
+            delete_cart_after_order(user_id)
+
+        else:
+            raise Exception('Invalid user')
+        return JsonResponse({'message': 'Order placed successfully!'})
     except json.JSONDecodeError:
         return JsonResponse({'error': 'Invalid data...'}, status=400)

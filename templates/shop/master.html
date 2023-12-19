@@ -35,7 +35,8 @@
 
         <div class = "logged-in-user">
         {% if user.is_authenticated %}
-            <a href = 'user_config/{{user.id}}'>Welcome {{ user.last_name }} {{user.first_name }} !</a>
+{#            href {% url 'user_config/' user.id %}#}
+            <a>Welcome {{ user.last_name }} {{user.first_name }} !</a>
         {% else %}
             <a href = "{% url 'signup' %}">Welcome Guest!</a>
         {% endif%}</div>

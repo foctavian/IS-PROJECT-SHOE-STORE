@@ -9,3 +9,10 @@ class Cart(models.Model):
     quantity = models.IntegerField(default=1)
 
 
+def get_items_by_user(user_id):
+    return Cart.objects.filter(user_id=user_id).values()
+
+
+def delete_cart_after_order(user_id):
+    Cart.objects.filter(user_id=user_id).delete()
+
