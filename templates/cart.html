@@ -109,25 +109,24 @@
     <script>
     document.getElementById("submit").addEventListener('click', placeOrder);
 
-    function placeOrder(){
-        var selected_shipping_company = $('.shipment-checkbox:checked').map(function() {
-    return [ $(this).next('label').text(), this.value ];
-}).get();
-        var selected_payment_method = $('.payment-checkbox:checked').map(function() {
-    return [ $(this).next('label').text(), this.value ];
-}).get();
+    function placeOrder() {
+        var selected_shipping_company = $('.shipment-checkbox:checked').map(function () {
+            return [$(this).next('label').text(), this.value];
+        }).get();
+        var selected_payment_method = $('.payment-checkbox:checked').map(function () {
+            return [$(this).next('label').text(), this.value];
+        }).get();
 
-        if (selected_shipping_company == null || selected_payment_method == null){
+        if (selected_shipping_company == null || selected_payment_method == null) {
             alert("Please select payment and shipping method");
 
-        }
-        else {
+        } else {
             const items = {
                 'user': {{ user }},
                 'shipping-company': selected_shipping_company,
-                'payment' : selected_payment_method,
-                'address' : document.getElementById("address").value,
-                'phone' : document.getElementById("phone").value,
+                'payment': selected_payment_method,
+                'address': document.getElementById("address").value,
+                'phone': document.getElementById("phone").value,
             };
 
             fetch(`http://localhost:8000/place_order/${items['user']}`, {
@@ -136,10 +135,13 @@
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(items),
-            }).then(response => response.json())
+            }).then((response) => response.json())
                 .then((data) => {
-                    console.log('Order sent: ', data);
+                    console.log('Success:', data);
                 })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
         }
     }
     </script>
