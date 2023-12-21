@@ -52,7 +52,6 @@ def store(request):
         products = Shoe.get_all_products()
 
     data = {'products': products, 'user': user}
-
     return render(request, 'shop/master.html', data)
 
 

@@ -117,16 +117,30 @@
             return [$(this).next('label').text(), this.value];
         }).get();
 
+        var address = document.getElementById("address").value;
+        var phone = document.getElementById("phone").value;
+
+        if(address === ""){
+            alert("Please enter address");
+            return;
+        }
+
+        if(checkPhoneNumber(phone) === false){
+            alert("Please enter valid phone number");
+            return;
+        }
+
         if (selected_shipping_company == null || selected_payment_method == null) {
             alert("Please select payment and shipping method");
+            return;
 
         } else {
             const items = {
                 'user': {{ user }},
                 'shipping-company': selected_shipping_company,
                 'payment': selected_payment_method,
-                'address': document.getElementById("address").value,
-                'phone': document.getElementById("phone").value,
+                'address': address,
+                'phone': phone,
             };
 
             fetch(`http://localhost:8000/place_order/${items['user']}`, {
@@ -135,15 +149,24 @@
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(items),
-            }).then((response) => response.json())
+            }).then((response) => {
+                    response.json();
+            })
                 .then((data) => {
+                    console.log(data);
                     console.log('Success:', data);
                 })
                 .catch((error) => {
+                    console.log(error);
                     console.error('Error:', error);
                 });
         }
     }
+
+    function checkPhoneNumber(phone){
+        return phone.length === 10;
+    }
+
     </script>
 
 

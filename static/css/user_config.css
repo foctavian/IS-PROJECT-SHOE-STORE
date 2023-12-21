@@ -1,0 +1,55 @@
+.vertical-menu {
+    display: flex;
+    flex-direction: column;
+    width: 200px; /* Menu width */
+    background-color: #f2f2f2;
+    padding: 20px;
+     float: left;
+    margin-left: 20px; /* Add spacing to the left side */
+}
+
+.vertical-menu ul {
+    list-style: none; /* Remove default list styling */
+}
+
+.vertical-menu li {
+    margin-bottom: 10px; /* Add spacing between menu items */
+}
+
+.vertical-menu a {
+    text-decoration: none; /* Remove default link underline */
+    display: block; /* Make links take up full width of menu item */
+    padding: 10px 20px; /* Add padding to links */
+    color: #000; /* Link text color */
+    border-bottom: 1px solid #ddd; /* Add a subtle border to each menu item */
+}
+
+.vertical-menu a:hover {
+    background-color: #eee; /* Hover effect on menu items */
+}
+
+.vertical-menu h1 {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px; /* Add spacing below the heading */
+}
+
+.orders-table {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%; /* Adjust width as needed */
+    max-width: 800px; /* Set maximum width for responsive design */
+    margin: 0 auto; /* Center container on page */
+}
+
+table {
+    border: 1px solid #ddd;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+}

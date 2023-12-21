@@ -1,8 +1,9 @@
 import json
 from datetime import datetime
 
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 
@@ -73,7 +74,7 @@ def order(request, user_id):
             date = datetime.today()
             cart_items = get_items_by_user(user_id)
 
-            new_order = Order.objects.create(
+            Order.objects.create(
                 user_id=user,
                 address=address,
                 phone=phone,
@@ -82,12 +83,10 @@ def order(request, user_id):
                 payment_method_id=1,
                 shipment_company_id=1
             )
-            # new_order.placeOrder()
             order_id = Order.objects.get(user_id=user_id, date=date)
 
             for item in cart_items:
                 shoe = Shoe.objects.get(id=int(item['item_id']))
-                # shoe_id = shoe[0]["id"]
                 order_product = OrderProduct.objects.create(
                     product=shoe,
                     price=0,
@@ -97,9 +96,8 @@ def order(request, user_id):
                 order_product.save()
             # delete the cart after order
             delete_cart_after_order(user_id)
-
+            return HttpResponseRedirect(reverse('store'))
         else:
             raise Exception('Invalid user')
-        return JsonResponse({'message': 'Order placed successfully!'})
     except json.JSONDecodeError:
-        return JsonResponse({'error': 'Invalid data...'}, status=400)
+        return JsonResponse({'error': 'INVALID DATA...'}, status=400)

@@ -1,22 +1,19 @@
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect, render
-from rest_framework.renderers import TemplateHTMLRenderer
-from rest_framework.response import Response
-from rest_framework.views import APIView
-
-from accounts.forms import CustomUserChangeForm
 from accounts.models import User
-from accounts.serializers import UserSerializer
+from store.models.order import Order,OrderProduct
 
 
-def user_config(request, user_id):
-    if request.method == 'GET':
-        try:
-            user = User.objects.get(pk=user_id)
-            return render(request, 'accounts/userconfig.html', context={'user': user})
-        except User.DoesNotExist:
-            raise Http404("User does not exist")
-    else:
-        pass
-
+def account(request, user_id):
+    try:
+        user = User.objects.get(pk=user_id)
+        orders = Order.objects.filter(user_id=user_id).values_list('id', 'status', 'date')
+        list_of_orders=[]
+        for order in orders:
+            products = OrderProduct.objects.get(order_id=order[0])
+            list_of_orders.append(products)
+        print(list_of_orders)
+        return render(request, 'accounts/userconfig.html', context={'user': user, 'orders': list_of_orders})
+    except User.DoesNotExist:
+        raise Http404("User does not exist")
 

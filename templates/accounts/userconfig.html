@@ -1,20 +1,39 @@
-{% load rest_framework %}
+{% load static %}
+{% load order %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Config</title>
+    <link rel="stylesheet" href="{% static 'css/user_config.css' %}">
 </head>
 <body>
-    <div class="vertical-menu">
-  <a href="#" class="active">Home</a>
-  <a href="#">Link 1</a>
-  <a href="#">Link 2</a>
-  <a href="#">Link 3</a>
-  <a href="#">Link 4</a>
-</div>
-
+        <nav class="vertical-menu">
     <h1> Profile {{ user.first_name }} {{ user.last_name }} </h1>
-     <h2>Orders</h2>
+
+    <ul>
+        <li><a href="#">Orders</a></li>
+        <li><a href="#">Account Settings</a></li>
+        <li><a href="#">Contact</a></li>
+    </ul>
+
+</nav>
+<div class = "orders-table">
+    <table>
+     <tr>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+
+        </tr>
+        {% for order in orders %}
+        <tr>
+            <td>{% product_name_by_id order.product_id %}</td>
+            <td>{{ order.quantity }}</td>
+            <td>{{ order.price }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
 </body>
 </html>
