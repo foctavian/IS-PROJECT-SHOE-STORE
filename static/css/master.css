@@ -347,10 +347,6 @@ a {
   outline: none;
 }
 
-/* On mouse-over */
-.sidenav a:hover, .dropdown-btn:hover {
-  color: #f1f1f1;
-}
 
 /* Main content */
 .main {
@@ -530,14 +526,28 @@ a {
 
 /* Style the checkmark/indicator */
 .filter-container .checkmark:after {
-  left: 4px; /* Adjusted for centering within a 15px square */
-  top: 2px; /* Adjusted for centering within a 15px square */
-  width: 6px; /* Adjusted for a smaller size within a 15px square */
+  left: 4px;
+  top: 2px;
+  width: 6px;
   height: 10px;
   border: solid white;
   border-width: 0 3px 3px 0;
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
+}
+
+.sidebar .apply-filters-button{
+    width: 100%;
+    background-color: #111;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+      -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 

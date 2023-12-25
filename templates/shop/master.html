@@ -24,62 +24,60 @@
 {#    change to curtain side bar which includes filter #}
     <div id="mySidebar" class="sidebar">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <button class="dropdown-btn">Size
+     <button class="dropdown-btn">Size
     <i class="fa fa-caret-down"></i>
-  </button>
-        <div class = "dropdown-checkbox-container">
-  <label class="filter-container">
-   <input type="checkbox" name="size" value="36">36
-      <span class="checkmark"></span>
-  </label>
-        <label class="filter-container">
-            <input type="checkbox" name="size" value="36">36.5
-      <span class="checkmark"></span>
-        </label>
-            </div>
+</button>
+<div class="dropdown-checkbox-container">
+    <label class="filter-container">
+        <input type="checkbox" name="size" value="36">36
+        <span class="checkmark"></span>
+    </label>
+    <label class="filter-container">
+        <input type="checkbox" name="size" value="36.5">36.5
+        <span class="checkmark"></span>
+    </label>
+</div>
 
-        <button class="dropdown-btn">Brand
+<button class="dropdown-btn">Brand
     <i class="fa fa-caret-down"></i>
-  </button>
-        <div class = "dropdown-checkbox-container">
-  <label class="filter-container">
-   <input type="checkbox" name="size" value="36">36
-      <span class="checkmark"></span>
-  </label>
-        <label class="filter-container">
-            <input type="checkbox" name="size" value="36">36.5
-      <span class="checkmark"></span>
-        </label>
-            </div>
+</button>
+<div class="dropdown-checkbox-container">
+    <label class="filter-container">
+        <input type="checkbox" name="brand" value="brand1">Brand 1
+        <span class="checkmark"></span>
+    </label>
+    <label class="filter-container">
+        <input type="checkbox" name="brand" value="brand2">Brand 2
+        <span class="checkmark"></span>
+    </label>
+</div>
 
-        <button class="dropdown-btn">Color
+<button class="dropdown-btn">Color
     <i class="fa fa-caret-down"></i>
-  </button>
-        <div class = "dropdown-checkbox-container">
-  <label class="filter-container">
-   <input type="checkbox" name="size" value="Red">Red
-      <span class="checkmark"></span>
-  </label>
-        <label class="filter-container">
-            <input type="checkbox" name="size" value="Green">Green
-      <span class="checkmark"></span>
-        </label>
+</button>
+<div class="dropdown-checkbox-container">
+    <label class="filter-container">
+        <input type="checkbox" name="color" value="Red">Red
+        <span class="checkmark"></span>
+    </label>
+    <label class="filter-container">
+        <input type="checkbox" name="color" value="Green">Green
+        <span class="checkmark"></span>
+    </label>
+    <label class="filter-container">
+        <input type="checkbox" name="color" value="Black">Black
+        <span class="checkmark"></span>
+    </label>
+    <label class="filter-container">
+        <input type="checkbox" name="color" value="White">White
+        <span class="checkmark"></span>
+    </label>
+    <label class="filter-container">
+        <input type="checkbox" name="color" value="Yellow">Yellow
+        <span class="checkmark"></span>
+    </label>
+</div>
 
-             <label class="filter-container">
-            <input type="checkbox" name="size" value="Black">Black
-      <span class="checkmark"></span>
-        </label>
-
-             <label class="filter-container">
-            <input type="checkbox" name="size" value="White">White
-      <span class="checkmark"></span>
-        </label>
-
-             <label class="filter-container">
-            <input type="checkbox" name="size" value="Yellow">Yellow
-      <span class="checkmark"></span>
-        </label>
-            </div>
 
 
   <button class="dropdown-btn">Gender
@@ -95,6 +93,11 @@
       <span class="checkmark"></span>
         </label>
             </div>
+
+
+        <button class = "apply-filters-button" onclick="filter_checkbox()">Apply filters</button>
+
+
 </div>
 
     <div class = "navigation" onClick = openNav()>
@@ -116,6 +119,9 @@
   {% include 'shop/cards.html' %}
     </div>
 </body>
+
+<script src = {% static 'js/dropdownMenu.js' %}></script>
+
 <script>
     // Get the input field
 var input = document.getElementById("search-input");
@@ -130,7 +136,24 @@ input.addEventListener("keypress", function(event) {
     document.getElementById("search-button").click();
   }
 });
+
+
 </script>
+
+<script>
+    function filter_checkbox(){
+        var checkboxes = document.getElementById("checkbox");
+        var text = document.getElementById("text");
+        var filters=[]
+        for (let i=0;i<checkboxes.length;i++){
+            if (checkboxes[i].checked === true){
+                filters.push(checkboxes[i].value)
+            }
+        }
+        console.log(filters)
+    }
+</script>
+
 <script>
     function openNav() {
   document.getElementById("mySidebar").style.width = "250px";
