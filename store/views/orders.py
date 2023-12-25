@@ -60,7 +60,7 @@ def add_to_cart(request, product_id):
 
 @csrf_exempt
 @require_POST
-def order(request, user_id):
+def order(request, user_id): # TODO : REFACTOR THIS : IT CREATES THE ORDER EVEN IF THE DATA ISN'T VALID
     try:
         # get the user
         data = json.loads(request.body)

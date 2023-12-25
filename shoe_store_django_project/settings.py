@@ -136,3 +136,5 @@ LOGOUT_REDIRECT_URL = "home"
 AUTH_USER_MODEL = "accounts.User"
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"

@@ -8,6 +8,7 @@ from .views.home import store, men_store
 from .views.orders import add_to_cart, OrderView,order
 from accounts.views.signup import signup
 from store.views.shoeview import product_detail_view
+from store.views.search import search
 
 
 urlpatterns = [
@@ -19,4 +20,5 @@ urlpatterns = [
     path('product/<int:product_id>', product_detail_view, name='products_details'),
     path('product/<int:product_id>/add_to_cart', add_to_cart, name='add_to_cart'),
     path('place_order/<int:user_id>',order, name='place_order'),
+    path('search', search, name='search'),
 ]

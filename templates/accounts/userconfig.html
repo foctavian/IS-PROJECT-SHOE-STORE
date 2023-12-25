@@ -8,24 +8,27 @@
     <link rel="stylesheet" href="{% static 'css/user_config.css' %}">
 </head>
 <body>
-        <nav class="vertical-menu">
-    <h1> Profile {{ user.first_name }} {{ user.last_name }} </h1>
-
-    <ul>
-        <li><a href="#">Orders</a></li>
-        <li><a href="#">Account Settings</a></li>
-        <li><a href="#">Contact</a></li>
-    </ul>
-
-</nav>
+       <div class="sidenav">
+  <a href="#contact">Orders</a>
+  <button class="dropdown-btn">Account Settings
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+    <a href="#">Change password</a>
+    <a href="#">Change email</a>
+  </div>
+           <a href="#contact">About</a>
+       <a href="#contact">Contact</a>
+</div>
 <div class = "orders-table">
     <table>
+    <thead>
      <tr>
-            <th>Product Name</th>
-            <th>Quantity</th>
-            <th>Price</th>
-
-        </tr>
+      <th style="text-align: center;">Comandat</th>
+      <th style="text-align: center;">DETALIILE COMENZII</th>
+    </tr>
+    </thead>
+     <tbody>
         {% for order in orders %}
         <tr>
             <td>{% product_name_by_id order.product_id %}</td>
@@ -33,7 +36,24 @@
             <td>{{ order.price }}</td>
         </tr>
         {% endfor %}
+    </tbody>
     </table>
 </div>
 </body>
+<script>
+      var dropdown = document.getElementsByClassName("dropdown-btn");
+    var i;
+
+    for (i = 0; i < dropdown.length; i++) {
+      dropdown[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var dropdownContent = this.nextElementSibling;
+        if (dropdownContent.style.display === "block") {
+          dropdownContent.style.display = "none";
+        } else {
+          dropdownContent.style.display = "block";
+        }
+  });
+}
+</script>
 </html>

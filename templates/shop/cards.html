@@ -11,6 +11,7 @@
 </head>
 <body>
 <div class = 'container'>
+    {% block content %}
     {% for product in products %}
   <div class="product-card", id = 'product-card' data-product-id = {{ product.id }}>
     <img src="static/images/{{ product.get_first_color }}_{{ product.images }}" alt="Product Image">
@@ -20,6 +21,7 @@
   </div>
 
     {% endfor %}
+    {% endblock %}
 </div>
 
 <script>
