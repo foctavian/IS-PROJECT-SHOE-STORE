@@ -1,5 +1,6 @@
 from django import template
 
+from store.models.brand import Brand
 from store.models.shoe import Shoe
 from store.models.category import Category
 
@@ -44,6 +45,16 @@ def get_category_name(name):
         shoe = Shoe.objects.get(name=name)
         category = shoe.category.category
         return category
+    except Shoe.DoesNotExist:
+        return ''
+
+
+@register.filter(name="brand_name")
+def brand_name(name):
+    try:
+        shoe = Shoe.objects.get(name=name)
+        brand = Brand.objects.get(pk=shoe.brand_id).brand
+        return brand
     except Shoe.DoesNotExist:
         return ''
 

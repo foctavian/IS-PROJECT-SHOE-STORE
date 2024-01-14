@@ -11,10 +11,11 @@ def account(request, user_id):
         user = User.objects.get(pk=user_id)
         orders = Order.objects.filter(user_id=user_id).values_list('id', 'status', 'date')
         list_of_orders=[]
-        for order in orders:
-            products = OrderProduct.objects.get(order_id=order[0])
-            list_of_orders.append(products)
-        print(list_of_orders)
+
+        # for order in orders:
+            # products = OrderProduct.objects.get(order_id=order[0])
+            # list_of_orders.append(products)
+        # print(list_of_orders)
         return render(request, 'accounts/userconfig.html', context={'user': user, 'orders': list_of_orders})
     except User.DoesNotExist:
         raise Http404("User does not exist")

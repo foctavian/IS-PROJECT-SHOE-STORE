@@ -29,11 +29,11 @@
 </button>
 <div class="dropdown-checkbox-container">
     <label class="filter-container">
-        <input type="checkbox" name="size" value="36">36
+        <input type="checkbox" name="sizes" value="36">36
         <span class="checkmark"></span>
     </label>
     <label class="filter-container">
-        <input type="checkbox" name="size" value="36.5">36.5
+        <input type="checkbox" name="sizes" value="36.5">36.5
         <span class="checkmark"></span>
     </label>
 </div>
@@ -43,11 +43,11 @@
 </button>
 <div class="dropdown-checkbox-container">
     <label class="filter-container">
-        <input type="checkbox" name="brand" value="brand1">Brand 1
+        <input type="checkbox" name="brand" value="NIKE">NIKE
         <span class="checkmark"></span>
     </label>
     <label class="filter-container">
-        <input type="checkbox" name="brand" value="brand2">Brand 2
+        <input type="checkbox" name="brand" value="ADIDAS">ADIDAS
         <span class="checkmark"></span>
     </label>
 </div>
@@ -57,23 +57,23 @@
 </button>
 <div class="dropdown-checkbox-container">
     <label class="filter-container">
-        <input type="checkbox" name="color" value="Red">Red
+        <input type="checkbox" name="colors" value="Red">Red
         <span class="checkmark"></span>
     </label>
     <label class="filter-container">
-        <input type="checkbox" name="color" value="Green">Green
+        <input type="checkbox" name="colors" value="Green">Green
         <span class="checkmark"></span>
     </label>
     <label class="filter-container">
-        <input type="checkbox" name="color" value="Black">Black
+        <input type="checkbox" name="colors" value="Black">Black
         <span class="checkmark"></span>
     </label>
     <label class="filter-container">
-        <input type="checkbox" name="color" value="White">White
+        <input type="checkbox" name="colors" value="White">White
         <span class="checkmark"></span>
     </label>
     <label class="filter-container">
-        <input type="checkbox" name="color" value="Yellow">Yellow
+        <input type="checkbox" name="colors" value="Yellow">Yellow
         <span class="checkmark"></span>
     </label>
 </div>
@@ -85,11 +85,11 @@
   </button>
         <div class = "dropdown-checkbox-container">
   <label class="filter-container">
-   <input type="checkbox" name="size" value="Male">Male
+   <input type="checkbox" name="gender" value="Male">Male
       <span class="checkmark"></span>
   </label>
         <label class="filter-container">
-            <input type="checkbox" name="size" value="Female">Female
+            <input type="checkbox" name="gender" value="Female">Female
       <span class="checkmark"></span>
         </label>
             </div>
@@ -141,18 +141,40 @@ input.addEventListener("keypress", function(event) {
 </script>
 
 <script>
-    function filter_checkbox(){
-        var checkboxes = document.getElementById("checkbox");
-        var text = document.getElementById("text");
-        var filters=[]
-        for (let i=0;i<checkboxes.length;i++){
-            if (checkboxes[i].checked === true){
-                filters.push(checkboxes[i].value)
-            }
+    function filter_checkbox() {
+    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+    var filters = {}
+    for (let i = 0; i < checkboxes.length; i++) {
+        if (checkboxes[i].checked === true) {
+            filters[checkboxes[i].name] = [checkboxes[i].value];
         }
-        console.log(filters)
     }
+    const data = {
+        'filters': filters
+    };
+    console.log(data);
+    fetch(`http://localhost:8000/filter`,
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+        .then((response) => response.json())
+    .then((data) => {
+         const serializedData = `{"data": ${data.products}}`;  // Replace with your actual serialized data
+    const encodedData = encodeURIComponent(serializedData);
+    window.location.href = `/filtered_products/?data=${encodedData}`;
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+}
+
 </script>
+
 
 <script>
     function openNav() {

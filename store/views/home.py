@@ -52,9 +52,11 @@ def store(request):
         products = Shoe.get_all_products()
 
     data = {'products': products, 'user': user}
+    print(products)
     return render(request, 'shop/master.html', data)
 
 
 def men_store(request):
     products = Shoe.get_all_products()
     return render(request, 'shop/shop_extended.html', {'products': products})
+
