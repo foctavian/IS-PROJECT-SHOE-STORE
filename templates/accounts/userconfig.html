@@ -1,20 +1,59 @@
-{% load rest_framework %}
+{% load static %}
+{% load order %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Config</title>
+    <link rel="stylesheet" href="{% static 'css/user_config.css' %}">
 </head>
 <body>
-    <div class="vertical-menu">
-  <a href="#" class="active">Home</a>
-  <a href="#">Link 1</a>
-  <a href="#">Link 2</a>
-  <a href="#">Link 3</a>
-  <a href="#">Link 4</a>
+       <div class="sidenav">
+  <a href="#contact">Orders</a>
+  <button class="dropdown-btn">Account Settings
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+    <a href="#">Change password</a>
+    <a href="#">Change email</a>
+  </div>
+           <a href="#contact">About</a>
+       <a href="#contact">Contact</a>
 </div>
-
-    <h1> Profile {{ user.first_name }} {{ user.last_name }} </h1>
-     <h2>Orders</h2>
+<div class = "orders-table">
+    <table>
+    <thead>
+     <tr>
+      <th style="text-align: center;">Comandat</th>
+      <th style="text-align: center;">DETALIILE COMENZII</th>
+    </tr>
+    </thead>
+     <tbody>
+        {% for order in orders %}
+        <tr>
+            <td>{% product_name_by_id order.product_id %}</td>
+            <td>{{ order.quantity }}</td>
+            <td>{{ order.price }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+</div>
 </body>
+<script>
+      var dropdown = document.getElementsByClassName("dropdown-btn");
+    var i;
+
+    for (i = 0; i < dropdown.length; i++) {
+      dropdown[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var dropdownContent = this.nextElementSibling;
+        if (dropdownContent.style.display === "block") {
+          dropdownContent.style.display = "none";
+        } else {
+          dropdownContent.style.display = "block";
+        }
+  });
+}
+</script>
 </html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Settings</title>
+</head>
+<body>
+    <h1>User Settings</h1>
+<div>
+    <form action="" method = "post" class = "form-container">
+        {% csrf_token %}
+        {% if setting == 'password' %}
+            <div class = "form-group">
+                <h1>Password</h1>
+            </div>
+
+        {% elif setting == 'email' %}
+        <div class = "form-group">
+            <label for = "id_email">Email</label>
+            {{ form.email }}
+        </div>
+        {% endif %}
+         <div id="form__field">
+          <input type="submit" onclick=redirect() value="Change {{ setting }}">
+        </div>
+    </form>
+</div>
+</body>
+<script>
+    function redirect(){
+        window.location.href= "{% url 'validate-email' user.id %}";
+    }
+
+
+</script>
+</html>

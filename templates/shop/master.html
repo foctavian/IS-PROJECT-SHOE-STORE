@@ -15,36 +15,177 @@
         <span class = "name">Shoe Shop</span>
 
     <div class="search">
-  <input type="search" autocomplete="off"/>
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="-20 -20 1000 150">
-    <path class="path" fill="none" d="M924.4 85.2c-19.5 19.5-50.8 19.7-70.3 0-19.3-19.4-19.3-51 .3-70.6 19.5-19.5 51-19.4 70.6 0 19.3 19.7 19.3 50.8-.5 70.6l35.4 35.3H0"></path>
-  </svg>
+ <form method="get" action="{% url 'search' %}">
+    <input id = "search-input" type="text" name="q" value="{{ request.GET.q }}">
+    <input id = "search-button" type="submit">
+</form>
+
 </div>
-    <nav>
-        <div class = "navigation">
+{#    change to curtain side bar which includes filter #}
+    <div id="mySidebar" class="sidebar">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+     <button class="dropdown-btn">Size
+    <i class="fa fa-caret-down"></i>
+</button>
+<div class="dropdown-checkbox-container">
+    <label class="filter-container">
+        <input type="checkbox" name="sizes" value="36">36
+        <span class="checkmark"></span>
+    </label>
+    <label class="filter-container">
+        <input type="checkbox" name="sizes" value="36.5">36.5
+        <span class="checkmark"></span>
+    </label>
+</div>
+
+<button class="dropdown-btn">Brand
+    <i class="fa fa-caret-down"></i>
+</button>
+<div class="dropdown-checkbox-container">
+    <label class="filter-container">
+        <input type="checkbox" name="brand" value="NIKE">NIKE
+        <span class="checkmark"></span>
+    </label>
+    <label class="filter-container">
+        <input type="checkbox" name="brand" value="ADIDAS">ADIDAS
+        <span class="checkmark"></span>
+    </label>
+</div>
+
+<button class="dropdown-btn">Color
+    <i class="fa fa-caret-down"></i>
+</button>
+<div class="dropdown-checkbox-container">
+    <label class="filter-container">
+        <input type="checkbox" name="colors" value="Red">Red
+        <span class="checkmark"></span>
+    </label>
+    <label class="filter-container">
+        <input type="checkbox" name="colors" value="Green">Green
+        <span class="checkmark"></span>
+    </label>
+    <label class="filter-container">
+        <input type="checkbox" name="colors" value="Black">Black
+        <span class="checkmark"></span>
+    </label>
+    <label class="filter-container">
+        <input type="checkbox" name="colors" value="White">White
+        <span class="checkmark"></span>
+    </label>
+    <label class="filter-container">
+        <input type="checkbox" name="colors" value="Yellow">Yellow
+        <span class="checkmark"></span>
+    </label>
+</div>
+
+
+
+  <button class="dropdown-btn">Gender
+    <i class="fa fa-caret-down"></i>
+  </button>
+        <div class = "dropdown-checkbox-container">
+  <label class="filter-container">
+   <input type="checkbox" name="gender" value="Male">Male
+      <span class="checkmark"></span>
+  </label>
+        <label class="filter-container">
+            <input type="checkbox" name="gender" value="Female">Female
+      <span class="checkmark"></span>
+        </label>
+            </div>
+
+
+        <button class = "apply-filters-button" onclick="filter_checkbox()">Apply filters</button>
+
+
+</div>
+
+    <div class = "navigation" onClick = openNav()>
             <div class="one"></div>
             <div class="two"></div>
             <div class="three"></div>
         </div>
-        <a>Men Shoes</a>
-        <a>Women Shoes</a>
-        <a>Sales</a>
-        <a>About</a>
-        <a>TODO</a>
-    </nav>
 
         <div class = "logged-in-user">
         {% if user.is_authenticated %}
-{#            href {% url 'user_config/' user.id %}#}
-            <a>Welcome {{ user.last_name }} {{user.first_name }} !</a>
+            <a href ="{% url 'account' user.id %}">Welcome {{ user.last_name }} {{user.first_name }} !</a>
         {% else %}
             <a href = "{% url 'signup' %}">Welcome Guest!</a>
         {% endif%}</div>
 
 
 </header>
-
+<div id = "main">
   {% include 'shop/cards.html' %}
-
+    </div>
 </body>
+
+<script src = {% static 'js/dropdownMenu.js' %}></script>
+
+<script>
+    // Get the input field
+var input = document.getElementById("search-input");
+
+// Execute a function when the user presses a key on the keyboard
+input.addEventListener("keypress", function(event) {
+  // If the user presses the "Enter" key on the keyboard
+  if (event.key === "Enter") {
+    // Cancel the default action, if needed
+    event.preventDefault();
+    // Trigger the button element with a click
+    document.getElementById("search-button").click();
+  }
+});
+
+
+</script>
+
+<script>
+    function filter_checkbox() {
+    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+    var filters = {}
+    for (let i = 0; i < checkboxes.length; i++) {
+        if (checkboxes[i].checked === true) {
+            filters[checkboxes[i].name] = [checkboxes[i].value];
+        }
+    }
+    const data = {
+        'filters': filters
+    };
+    console.log(data);
+    fetch(`http://localhost:8000/filter`,
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+        .then((response) => response.json())
+    .then((data) => {
+         const serializedData = `{"data": ${data.products}}`;  // Replace with your actual serialized data
+    const encodedData = encodeURIComponent(serializedData);
+    window.location.href = `/filtered_products/?data=${encodedData}`;
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+}
+
+</script>
+
+
+<script>
+    function openNav() {
+  document.getElementById("mySidebar").style.width = "250px";
+  document.getElementById("main").style.marginLeft = "250px";
+}
+
+/* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
+function closeNav() {
+  document.getElementById("mySidebar").style.width = "0";
+  document.getElementById("main").style.marginLeft = "0";
+}
+</script>
 </html>

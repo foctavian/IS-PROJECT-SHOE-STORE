@@ -38,4 +38,4 @@ class OrderProduct(models.Model):
                                 on_delete=models.CASCADE)
     price = models.IntegerField()
     quantity = models.IntegerField(default=1)
-    order_id = models.ForeignKey(Order, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)

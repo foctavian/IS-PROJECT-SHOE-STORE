@@ -36,7 +36,7 @@ h1{
 }
 
 .container .imgBx:before {
-    content: 'Nike';
+    /*content: 'Nike';*/
     position: absolute;
     top: 0px;
     left: 24px;

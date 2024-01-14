@@ -1,5 +1,6 @@
 {% load static %}
 {% load custom_filter %}
+{% load shop_filter %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +10,6 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 </head>
 <body>
-<h1>{{ user }}</h1>>
     <button class = "cart-container">
         <img class = "cart-icon" src = "{% static 'images/cart.svg' %}" alt = "cart" type = "button" onClick=redirectToCart()>
     </button>
@@ -18,7 +18,7 @@
 
   <div class = 'content-cards'>
          <div class="container">
-        <div class="imgBx">
+        <div class="imgBx" style = "::before content={{ product.name | brand_name}}" >
             <img class = "svg-icon" src="../static/images/{{ product.get_first_color}}_{{product.images}}" alt="{{ product.name }}">
         </div>
         <div class="details">

@@ -149,9 +149,9 @@ a {
   user-select: none;
 }
 
-a:hover { background: #8CEABBFF; }
+.navigation a:hover { background: #8CEABBFF; }
 
-a:active { background: #8CEABBFF; }
+.navigation a:active { background: #8CEABBFF; }
 
 .navigation {
   padding: 23px 20px;
@@ -183,7 +183,7 @@ a:active { background: #8CEABBFF; }
 
 .navigation div:after { top: 7px; }
 
-/* search box*/
+/*!* search box*!*/
 .search {
   position: absolute;
   width: 300px;
@@ -194,59 +194,10 @@ a:active { background: #8CEABBFF; }
   overflow: hidden;
      padding: 1em;
 }
-.search svg {
-  width: 250px;
-  transform: translate3d(-125px, 0, 0);
-  transition: 0.5s;
-  pointer-events: none;
-}
-.search input {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: transparent;
-  border: none;
-  color: #fff;
-  font-family: sans-serif;
-  font-size: 1rem;
-  padding: 10px 55px 10px 10px;
-  box-sizing: border-box;
-  cursor: pointer;
-}
-.search input::-moz-selection {
-  background: rgba(0, 0, 0, 0.3);
-}
-.search input::selection {
-  background: rgba(0, 0, 0, 0.3);
-}
-.search input:valid, .search input:focus {
-  cursor: auto;
-}
-.search input:valid + svg, .search input:focus + svg {
-  transform: translate3d(0, 0, 0);
-}
-.search input:focus {
-  cursor: auto;
-  outline: none;
-}
-.search input:focus + svg .path {
-  stroke-dasharray: 961, 363;
-  stroke-dashoffset: -363;
-}
-.search .path {
-  stroke-dasharray: 363, 961;
-  stroke-dashoffset: 0;
-  stroke: #fff;
-  stroke-width: 10;
-  stroke-linejoin: round;
-  stroke-linecap: round;
-  transition: 0.5s;
-}
 
-
-
+#search-button{
+    display:none;
+}
 
 /*card*/
  .container {
@@ -381,7 +332,49 @@ a:active { background: #8CEABBFF; }
     top: -5px;
 }
 
-/* responsive */
+
+.sidebar .dropdown-btn {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #818181;
+  display: block;
+  border: none;
+  background: none;
+  width:100%;
+  text-align: left;
+  cursor: pointer;
+  outline: none;
+}
+
+
+/* Main content */
+.main {
+  margin-left: 200px; /* Same as the width of the sidenav */
+  font-size: 20px; /* Increased text to enable scrolling */
+  padding: 0px 10px;
+}
+
+/* Add an active class to the active dropdown button */
+.active {
+  background-color: green;
+  color: white;
+}
+
+/* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
+.dropdown-checkbox-container {
+  display: none;
+  background-color: #262626;
+  padding-left: 8px;
+}
+
+/* Optional: Style the caret down icon */
+.fa-caret-down {
+  float: right;
+  padding-right: 8px;
+}
+
+
 @media (max-width: 1080px) {
     .container {
         height: auto;
@@ -409,3 +402,152 @@ a:active { background: #8CEABBFF; }
         max-width: 100%;
     }
 }
+
+
+ .sidebar {
+  height: 100%; /* 100% Full-height */
+  width: 0; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Stay on top */
+  top: 0;
+  left: 0;
+  background-color: #111; /* Black*/
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 60px; /* Place content 60px from the top */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
+}
+
+/* The sidebar links */
+.sidebar a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidebar a:hover {
+  color: #f1f1f1;
+}
+
+/* Position and style the close button (top right corner) */
+.sidebar .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+/* The button used to open the sidebar */
+.openbtn {
+  font-size: 20px;
+  cursor: pointer;
+  background-color: #111;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+}
+
+.openbtn:hover {
+  background-color: #444;
+}
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#main {
+  transition: margin-left .5s; /* If you want a transition effect */
+  padding: 20px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidebar {padding-top: 15px;}
+  .sidebar a {font-size: 18px;}
+}
+
+
+
+ .filter-container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+     color:white;
+  font-size: 15px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.filter-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 15px;
+  width: 15px;
+  background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.filter-container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.filter-container input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.filter-container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.filter-container .checkmark:after {
+  left: 4px;
+  top: 2px;
+  width: 6px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.sidebar .apply-filters-button{
+    width: 100%;
+    background-color: #111;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+      -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
