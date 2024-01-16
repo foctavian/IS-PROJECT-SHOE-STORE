@@ -14,8 +14,10 @@ def signup(request):
         password2 = request.POST.get('password2')
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
+        role = request.POST.get('role')
+        role = User.get_role_by_name(role)
         if password1 ==  password2 and password1 and password2:
-            user = User(email=email, password=password1, last_name=last_name, first_name=first_name)
+            user = User(email=email, password=password1, last_name=last_name, first_name=first_name, role=role)
             user.save()
             return redirect('home')
         else:

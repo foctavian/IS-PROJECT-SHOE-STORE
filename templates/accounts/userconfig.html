@@ -17,9 +17,12 @@
     <a href="#">Change password</a>
     <a href="#">Change email</a>
   </div>
-           <a href="#contact">About</a>
-       <a href="#contact">Contact</a>
-</div>
+           {% if user.is_authenticated %}
+               {% if user.role == 3 %}
+                <a href="requests">Order requests</a>
+           {% endif %}
+           {% endif %}
+       </div>
 <div class = "orders-table">
     <table>
     <thead>

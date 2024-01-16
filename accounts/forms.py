@@ -1,6 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm
 
-from .models import User
+from .models import User,ROLE_CHOICES,CUSTOMER,PROVIDER,ADMIN,GUEST
 from django import forms
 
 
@@ -10,10 +10,10 @@ class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField(max_length=255, required=True)
     password1 = forms.CharField(widget=forms.PasswordInput(), required=True, label='Password')
     password2 = forms.CharField(widget=forms.PasswordInput(), required=True, label='Confirm Password')
-
+    role = forms.CharField(max_length=10,required=True,widget=forms.Select(choices=ROLE_CHOICES),label='Role')
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'email', 'password1', 'password2')
+        fields = ('first_name', 'last_name', 'email', 'password1', 'password2', 'role')
 
     def clean_password2(self):
         password1 = self.cleaned_data.get('password1')

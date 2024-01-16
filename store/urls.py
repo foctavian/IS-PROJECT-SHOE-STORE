@@ -9,6 +9,7 @@ from .views.orders import add_to_cart, OrderView, order
 from accounts.views.signup import signup
 from store.views.shoeview import product_detail_view
 from store.views.search import search, apply_filters, filtered_products
+from .views.requests import RequestView
 
 urlpatterns = [
     path('store', store, name='store'),
@@ -22,4 +23,5 @@ urlpatterns = [
     path('search', search, name='search'),
     path('filter', apply_filters, name='apply_filters'),
     path('filtered_products/', filtered_products, name='filtered_products'),
+    # path('requests/', RequestView.as_view(),name='requests'),
 ]

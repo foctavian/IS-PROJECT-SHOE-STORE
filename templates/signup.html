@@ -54,7 +54,13 @@
               <label for="id_password2">Password Confirmation:</label>
               {{ form.password2 }}
           </div>
-
+        <div class = "form-group">
+                         Role: <select name = "role" id = "role">
+                    <option value = "customer">Customer</option>
+                    <option value = "provider">Provider</option>
+            </select>
+                <br><br>
+                   </div>
         <div id="form__field">
           <input type="submit" value="Sign Up">
         </div>
@@ -65,4 +71,11 @@
     {% endblock %}
 
 </div>
+<script>
+    function dropdown_role(){
+        var role = document.getElementById("role").value;
+        if (role === "customer") {
+        }
+    }
+</script>
 </body>
