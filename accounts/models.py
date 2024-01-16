@@ -7,12 +7,12 @@ from accounts.managers import CustomUserManager
 
 CUSTOMER = 1
 GUEST = 2
-SELLER = 3
+PROVIDER = 3
 ADMIN = 4
 
 ROLE_CHOICES = (
     (CUSTOMER, "customer"),
-    (SELLER, "seller"),
+    (PROVIDER, "provider"),
     (ADMIN, "admin")
 )
 
@@ -22,13 +22,15 @@ class User(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(max_length=30, blank=True)
     last_name = models.CharField(max_length=150, blank=True)
     date_joined = models.DateTimeField(default=timezone.now)
-    role = models.CharField(max_length=10, choices=ROLE_CHOICES, default=CUSTOMER)
+    role = models.IntegerField(choices=ROLE_CHOICES, default=CUSTOMER)
     password = models.CharField(max_length=128)
     phone = models.CharField(max_length=10, unique=True, null=True, blank=True)
-
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)  # a admin user; non super-user
+    is_superuser = models.BooleanField(default=False)  # a superuser
     USERNAME_FIELD = "email"
 
-    REQUIRED_FIELDS = ['password', first_name, last_name]
+    REQUIRED_FIELDS = ['password', 'first_name', 'last_name']
 
     objects = CustomUserManager()
 
@@ -47,3 +49,10 @@ class User(AbstractBaseUser, PermissionsMixin):
             return User.objects.get(email=email)
         except:
             return False
+
+    @staticmethod
+    def get_role_by_name(role):
+        if role == 'customer':
+            return CUSTOMER
+        elif role == 'provider':
+            return PROVIDER
